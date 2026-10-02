@@ -1985,4 +1985,80 @@ img, svg {
   margin-bottom: 1.25rem;
 }
 
+/* Gold Nav Item in Bottom Bar */
+.mobile-nav-item.gold-item {
+  color: var(--secondary-dark);
+}
+
+.mobile-nav-item.gold-item.active {
+  color: var(--secondary-dark);
+}
+
+.mobile-nav-item.gold-item.active .mobile-nav-active-pill {
+  background: var(--secondary);
+}
+
+/* ==========================================================================
+   Comprehensive Scoped Mobile UI Enhancements (Desktop Intact)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Headings scale comfortably */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.3rem !important;
+  }
+  
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Card padding on mobile */
+  .card {
+    padding: 1.15rem 1rem !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* Filter bar horizontal scrolling on mobile */
+  .filter-chips-container {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    gap: 0.4rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filter-chips-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Auth forms full width padding on mobile */
+  .auth-card {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: var(--radius-lg) !important;
+  }
+
+  /* Form grids become single column */
+  .form-grid-2col {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  /* Table container touch momentum */
+  .table-container {
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md) !important;
+  }
+
+  /* Buttons on mobile */
+  .btn {
+    min-height: 42px;
+  }
+}
+
+
 

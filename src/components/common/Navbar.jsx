@@ -573,90 +573,10 @@ export const Navbar = () => {
           }
         `}</style>
       </header>
-
-      {/* =========================================================================
-          NATIVE-FEELING MOBILE BOTTOM NAVIGATION BAR
-          ========================================================================= */}
-      <nav className="mobile-bottom-bar" aria-label="Mobile Bottom Navigation">
-        {/* Tab 1: Home / Dashboard */}
-        <Link
-          to={isAuthenticated ? getPortalPath() : '/'}
-          className={`mobile-bottom-nav-item ${(isActive('/') || isActive(getPortalPath())) ? 'active' : ''}`}
-        >
-          <div className="mobile-nav-icon-wrapper">
-            <Home size={20} />
-          </div>
-          <span>{isAuthenticated ? 'Dashboard' : 'Home'}</span>
-        </Link>
-
-        {/* Tab 2: Explore Sessions */}
-        <Link
-          to="/browse"
-          className={`mobile-bottom-nav-item ${isActive('/browse') ? 'active' : ''}`}
-        >
-          <div className="mobile-nav-icon-wrapper">
-            <BookOpen size={20} />
-          </div>
-          <span>Sessions</span>
-        </Link>
-
-        {/* Tab 3: Leaderboard & Awards */}
-        <Link
-          to="/leaderboard"
-          className={`mobile-bottom-nav-item gold-active ${isActive('/leaderboard') ? 'active gold-active' : ''}`}
-        >
-          <div className="mobile-nav-icon-wrapper">
-            <Trophy size={20} />
-          </div>
-          <span>Standings</span>
-        </Link>
-
-        {/* Tab 4: Role Quick Action / Portal / Sign In */}
-        {!isAuthenticated ? (
-          <Link
-            to="/login"
-            className={`mobile-bottom-nav-item ${isActive('/login') ? 'active' : ''}`}
-          >
-            <div className="mobile-nav-icon-wrapper">
-              <UserIcon size={20} />
-            </div>
-            <span>Sign In</span>
-          </Link>
-        ) : role === 'tutor' ? (
-          <Link
-            to="/tutor/create-session"
-            className={`mobile-bottom-nav-item ${isActive('/tutor/create-session') ? 'active' : ''}`}
-          >
-            <div className="mobile-nav-icon-wrapper">
-              <PlusCircle size={20} />
-            </div>
-            <span>+ Create</span>
-          </Link>
-        ) : role === 'student' ? (
-          <Link
-            to="/student/attendance"
-            className={`mobile-bottom-nav-item ${isActive('/student/attendance') ? 'active' : ''}`}
-          >
-            <div className="mobile-nav-icon-wrapper">
-              <CheckCircle size={20} />
-            </div>
-            <span>Attendance</span>
-          </Link>
-        ) : (
-          <Link
-            to="/admin/sessions"
-            className={`mobile-bottom-nav-item ${isActive('/admin/sessions') ? 'active' : ''}`}
-          >
-            <div className="mobile-nav-icon-wrapper">
-              <ShieldCheck size={20} />
-            </div>
-            <span>Audit</span>
-          </Link>
-        )}
-      </nav>
     </>
   );
 };
 
 export default Navbar;
+
 

@@ -5,8 +5,10 @@ import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import MobileBottomNav from './components/common/MobileBottomNav';
 
 // Public Pages
+
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -71,6 +73,7 @@ export const App = () => {
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </div>
+            <MobileBottomNav />
             <Footer />
           </div>
         </AuthProvider>
@@ -80,3 +83,4 @@ export const App = () => {
 };
 
 export default App;
+

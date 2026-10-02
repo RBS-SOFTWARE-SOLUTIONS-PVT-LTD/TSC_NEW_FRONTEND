@@ -167,76 +167,131 @@ export const StudentAttendanceHistory = () => {
             </p>
           </div>
         ) : (
-          <div className="table-container" style={{ border: 'none', borderRadius: 0, boxShadow: 'none' }}>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Subject & Topic</th>
-                  <th>Peer Tutor</th>
-                  <th>Session Date</th>
-                  <th>Check-In Time</th>
-                  <th>Mode & Venue</th>
-                  <th>Method</th>
-                  <th>Feedback</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredHistory.map((item, idx) => (
-                  <tr key={idx}>
-                    <td>
-                      <div style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '0.95rem' }}>{item.subject}</div>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>{item.topic}</div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 600 }}>{item.tutor?.name || 'Faculty Tutor'}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.tutor?.faculty || 'UOK'}</div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 500 }}>
+          <>
+            {/* Mobile View: Touch-Optimized Cards Feed */}
+
+            <div className="mobile-records-feed mobile-only" style={{ padding: '0.75rem' }}>
+              {filteredHistory.map((item, idx) => (
+                <div key={idx} className="mobile-record-card" style={{ marginBottom: '0.75rem' }}>
+                  <div className="mobile-record-top">
+                    <span className="record-subject-badge">{item.subject}</span>
+                    <span className="badge badge-success">
+                      <CheckCircle2 size={11} /> {item.verificationMethod?.toUpperCase() || 'OTP'}
+                    </span>
+                  </div>
+
+                  <h4 className="mobile-record-topic">{item.topic}</h4>
+
+                  <div className="mobile-record-meta-list">
+                    <div className="mobile-record-meta-item">
+                      <span className="text-muted font-semibold">Tutor:</span>
+                      <span>{item.tutor?.name || 'Faculty Tutor'}</span>
+                    </div>
+                    <div className="mobile-record-meta-item">
+                      <Calendar size={13} className="text-muted" />
+                      <span>
                         {item.date ? new Date(item.date).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
-                      </div>
-                      {item.durationMinutes > 0 && (
-                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                          Duration: {item.durationMinutes} min
-                        </div>
-                      )}
-                    </td>
-                    <td>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>
-                        {item.joinedAt ? new Date(item.joinedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '-'}
-                      </div>
-                    </td>
-                    <td>
-                      {item.type === 'online' ? (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: 'var(--info)' }}>
-                          <Video size={14} /> Online
-                        </span>
-                      ) : (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                          <MapPin size={14} color="var(--primary)" /> {item.location || 'Faculty Room'}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <span className="badge badge-success">
-                        <CheckCircle2 size={12} />
-                        {item.verificationMethod?.toUpperCase() || 'OTP'}
                       </span>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleRate(item)}
-                        className="btn btn-outline-primary btn-sm"
-                        style={{ fontSize: '0.78rem' }}
-                      >
-                        <Star size={13} /> Rate Tutor
-                      </button>
-                    </td>
+                    </div>
+                    <div className="mobile-record-meta-item">
+                      <Clock size={13} className="text-muted" />
+                      <span>
+                        {item.joinedAt ? new Date(item.joinedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '-'}
+                      </span>
+                    </div>
+                    <div className="mobile-record-meta-item">
+                      {item.type === 'online' ? (
+                        <span className="text-info flex items-center gap-1"><Video size={13} /> Online</span>
+                      ) : (
+                        <span className="text-muted flex items-center gap-1"><MapPin size={13} /> {item.location || 'Room'}</span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mobile-record-footer">
+                    <button
+                      onClick={() => handleRate(item)}
+                      className="btn btn-outline-primary btn-sm w-full"
+                    >
+                      <Star size={14} /> Rate & Review Tutor
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View: Wide Data Table */}
+            <div className="table-container desktop-only" style={{ border: 'none', borderRadius: 0, boxShadow: 'none' }}>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Subject & Topic</th>
+                    <th>Peer Tutor</th>
+                    <th>Session Date</th>
+                    <th>Check-In Time</th>
+                    <th>Mode & Venue</th>
+                    <th>Method</th>
+                    <th>Feedback</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {filteredHistory.map((item, idx) => (
+                    <tr key={idx}>
+                      <td>
+                        <div style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '0.95rem' }}>{item.subject}</div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>{item.topic}</div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600 }}>{item.tutor?.name || 'Faculty Tutor'}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.tutor?.faculty || 'UOK'}</div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 500 }}>
+                          {item.date ? new Date(item.date).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
+                        </div>
+                        {item.durationMinutes > 0 && (
+                          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                            Duration: {item.durationMinutes} min
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+                          {item.joinedAt ? new Date(item.joinedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '-'}
+                        </div>
+                      </td>
+                      <td>
+                        {item.type === 'online' ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', color: 'var(--info)' }}>
+                            <Video size={14} /> Online
+                          </span>
+                        ) : (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                            <MapPin size={14} color="var(--primary)" /> {item.location || 'Faculty Room'}
+                          </span>
+                        )}
+                      </td>
+                      <td>
+                        <span className="badge badge-success">
+                          <CheckCircle2 size={12} />
+                          {item.verificationMethod?.toUpperCase() || 'OTP'}
+                        </span>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleRate(item)}
+                          className="btn btn-outline-primary btn-sm"
+                          style={{ fontSize: '0.78rem' }}
+                        >
+                          <Star size={13} /> Rate Tutor
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
 

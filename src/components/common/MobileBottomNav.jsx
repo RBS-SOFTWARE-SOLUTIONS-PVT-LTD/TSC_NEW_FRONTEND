@@ -10,37 +10,45 @@ import {
   Users,
   ShieldCheck,
   BookOpen,
-  Sparkles,
+  Home,
+  User,
 } from 'lucide-react';
 
 export const MobileBottomNav = () => {
   const { role, isAuthenticated } = useAuth();
   const location = useLocation();
 
-  if (!isAuthenticated) return null;
-
   const getNavItems = () => {
+    if (!isAuthenticated) {
+      return [
+        { to: '/', label: 'Home', icon: Home },
+        { to: '/browse', label: 'Sessions', icon: BookOpen },
+        { to: '/leaderboard', label: 'Rankings', icon: Trophy, isGold: true },
+        { to: '/login', label: 'Sign In', icon: User },
+      ];
+    }
+
     switch (role) {
       case 'student':
         return [
           { to: '/student/dashboard', label: 'Dashboard', icon: LayoutDashboard },
           { to: '/student/sessions', label: 'Browse', icon: Calendar },
           { to: '/student/attendance', label: 'Attendance', icon: CheckCircle2 },
-          { to: '/leaderboard', label: 'Rankings', icon: Trophy },
+          { to: '/leaderboard', label: 'Rankings', icon: Trophy, isGold: true },
         ];
       case 'tutor':
         return [
           { to: '/tutor/dashboard', label: 'Dashboard', icon: LayoutDashboard },
           { to: '/tutor/create-session', label: 'Create', icon: PlusCircle, highlight: true },
           { to: '/tutor/my-sessions', label: 'Classes', icon: Calendar },
-          { to: '/leaderboard', label: 'Rankings', icon: Trophy },
+          { to: '/leaderboard', label: 'Rankings', icon: Trophy, isGold: true },
         ];
       case 'admin':
         return [
           { to: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
           { to: '/admin/users', label: 'Users', icon: Users },
           { to: '/admin/sessions', label: 'Audits', icon: ShieldCheck },
-          { to: '/leaderboard', label: 'Rankings', icon: Trophy },
+          { to: '/leaderboard', label: 'Rankings', icon: Trophy, isGold: true },
         ];
       default:
         return [];
@@ -60,7 +68,7 @@ export const MobileBottomNav = () => {
             <NavLink
               key={item.to}
               to={item.to}
-              className={`mobile-nav-item ${isActive ? 'active' : ''} ${item.highlight ? 'highlight' : ''}`}
+              className={`mobile-nav-item ${isActive ? 'active' : ''} ${item.highlight ? 'highlight' : ''} ${item.isGold ? 'gold-item' : ''}`}
             >
               <div className="mobile-nav-icon-wrap">
                 <Icon size={20} className="mobile-nav-icon" />

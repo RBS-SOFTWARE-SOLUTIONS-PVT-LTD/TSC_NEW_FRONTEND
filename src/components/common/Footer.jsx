@@ -114,32 +114,69 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom copyright line */}
+        {/* Bottom copyright & creators line */}
         <div
           style={{
             borderTop: '1px solid #333238',
             paddingTop: '1.75rem',
             display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: 'column',
             gap: '1rem',
-            fontSize: '0.8rem',
+            fontSize: '0.85rem',
             color: '#8E8E93',
           }}
         >
-          <div>
-            © {new Date().getFullYear()} University of Kelaniya. All Rights Reserved. Tutoring Support Center System.
+          {/* Creator Attribution Banner */}
+          <div
+            style={{
+              background: 'linear-gradient(135deg, rgba(122, 22, 49, 0.3) 0%, rgba(212, 167, 44, 0.15) 100%)',
+              border: '1px solid rgba(212, 167, 44, 0.25)',
+              borderRadius: 'var(--radius-md)',
+              padding: '0.875rem 1.25rem',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '0.75rem',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#FAF9F6', fontWeight: 600 }}>
+              <Heart size={16} color="#E8C866" fill="#E8C866" style={{ flexShrink: 0 }} />
+              <span>
+                Engineered & Developed by <strong style={{ color: '#E8C866' }}>RBS Software Solutions</strong>
+                <span style={{ color: '#C5C1BA', fontWeight: 500 }}> (Sithija Himantha, Vishan Randima)</span>
+              </span>
+            </div>
+            <div style={{ fontSize: '0.78rem', color: '#E8C866', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Academic Tech Innovation
+            </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-            <span>Privacy Policy</span>
-            <span>Academic Code of Ethics</span>
-            <span>System Status: <span style={{ color: 'var(--success)' }}>Operational 🟢</span></span>
+
+          {/* Standard Copyright Row */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem',
+              fontSize: '0.8rem',
+            }}
+          >
+            <div>
+              © {new Date().getFullYear()} University of Kelaniya. All Rights Reserved. Tutoring Support Center System.
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+              <span>Privacy Policy</span>
+              <span>Academic Code of Ethics</span>
+              <span>System Status: <span style={{ color: 'var(--success)' }}>Operational 🟢</span></span>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
 };
+
 
 export default Footer;

@@ -1,16 +1,20 @@
-# React + Vite
+# University of Kelaniya - Tutoring Support Center (TSC)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Official Academic Tutoring Support Center Portal for the University of Kelaniya.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
+- **Student Dashboard**: Live class radar, verified attendance feed, 1-tap OTP check-in, academic standing metrics.
+- **Tutor Command Center**: Live session controls, real-time OTP/QR code broadcasting, dynamic rating scores.
+- **Admin Audit & Command**: User management, session audit trails, system performance metrics.
+- **Leaderboard & Awards**: Monthly and annual tutor performance rankings with weighted scoring algorithms.
+- **Mobile First Engineering**: Touch-optimized bottom navigation, responsive Bento cards, adaptive feed views.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 👨‍💻 System Creators & Copyright
+**Developed and Engineered by:**
+- **RBS Software Solutions**
+  - **Sithija Himantha**
+  - **Vishan Randima**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+© 2026 University of Kelaniya & RBS Software Solutions. All Rights Reserved.
