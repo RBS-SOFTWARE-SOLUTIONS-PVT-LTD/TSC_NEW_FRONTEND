@@ -249,23 +249,6 @@ export const LoginPage = () => {
               Register Here
             </Link>
           </div>
-
-          {/* Discreet Faculty Staff Link */}
-          <div
-            style={{
-              textAlign: 'center',
-              marginTop: '2rem',
-              paddingTop: '1.25rem',
-              borderTop: '1px solid var(--border-light)',
-              fontSize: '0.8rem',
-              color: 'var(--text-muted)',
-            }}
-          >
-            Faculty Staff or Administrator?{' '}
-            <Link to="/admin/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-              Access Faculty Admin Console &rarr;
-            </Link>
-          </div>
         </div>
       </div>
     </div>

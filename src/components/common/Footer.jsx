@@ -67,12 +67,12 @@ export const Footer = () => {
               </li>
               <li>
                 <Link to="/login" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
-                  Student & Tutor Portal
+                  Student & Tutor Sign In
                 </Link>
               </li>
               <li>
-                <Link to="/admin/login" style={{ color: 'var(--secondary-light)', transition: 'color 0.2s', fontWeight: 600 }}>
-                  Faculty Staff & Admin Access &rarr;
+                <Link to="/register" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
+                  Join as Peer Tutor / Student
                 </Link>
               </li>
             </ul>
