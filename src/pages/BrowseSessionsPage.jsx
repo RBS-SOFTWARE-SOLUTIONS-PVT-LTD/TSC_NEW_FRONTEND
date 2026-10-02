@@ -108,12 +108,12 @@ export const BrowseSessionsPage = () => {
         }}
       >
         <form onSubmit={handleSearchSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
             {/* Search Input */}
-            <div style={{ flex: 1, minWidth: '260px', position: 'relative' }}>
+            <div style={{ flex: '1 1 240px', position: 'relative' }}>
               <input
                 type="text"
-                placeholder="Search by subject (e.g. Software Eng, Math, Physics) or topic..."
+                placeholder="Search subject, module, tutor..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="form-input"
@@ -126,57 +126,64 @@ export const BrowseSessionsPage = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
-              <Search size={16} /> Search
-            </button>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'nowrap' }}>
+              <button type="submit" className="btn btn-primary" style={{ flexShrink: 0 }}>
+                <Search size={16} /> Search
+              </button>
 
-            <button
-              type="button"
-              onClick={fetchSessions}
-              className="btn btn-outline"
-              title="Refresh schedule"
-            >
-              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
-            </button>
+              <button
+                type="button"
+                onClick={fetchSessions}
+                className="btn btn-outline"
+                title="Refresh schedule"
+                style={{ flexShrink: 0 }}
+              >
+                <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+              </button>
+            </div>
           </div>
 
           {/* Filter Pills */}
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', borderTop: '1px solid var(--border-light)', paddingTop: '0.875rem' }}>
             {/* Status Filter */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', maxWidth: '100%', overflowX: 'auto' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', flexShrink: 0 }}>
                 Status:
               </span>
-              {[
-                { id: 'all', label: 'All Sessions' },
-                { id: 'active', label: '🔴 Live Now' },
-                { id: 'scheduled', label: '📅 Scheduled' },
-                { id: 'completed', label: '✅ Completed' },
-              ].map((pill) => (
-                <button
-                  key={pill.id}
-                  type="button"
-                  onClick={() => setSelectedStatus(pill.id)}
-                  style={{
-                    padding: '0.35rem 0.75rem',
-                    borderRadius: 'var(--radius-pill)',
-                    fontSize: '0.8rem',
-                    fontWeight: selectedStatus === pill.id ? 700 : 500,
-                    backgroundColor: selectedStatus === pill.id ? 'var(--primary)' : 'var(--bg-main)',
-                    color: selectedStatus === pill.id ? '#FFFFFF' : 'var(--text-secondary)',
-                    border: '1px solid',
-                    borderColor: selectedStatus === pill.id ? 'var(--primary)' : 'var(--border-color)',
-                    transition: 'all 0.15s',
-                  }}
-                >
-                  {pill.label}
-                </button>
-              ))}
+              <div className="horizontal-scroll-chips" style={{ flex: 1 }}>
+                {[
+                  { id: 'all', label: 'All Sessions' },
+                  { id: 'active', label: '🔴 Live Now' },
+                  { id: 'scheduled', label: '📅 Scheduled' },
+                  { id: 'completed', label: '✅ Completed' },
+                ].map((pill) => (
+                  <button
+                    key={pill.id}
+                    type="button"
+                    onClick={() => setSelectedStatus(pill.id)}
+                    style={{
+                      padding: '0.35rem 0.75rem',
+                      borderRadius: 'var(--radius-pill)',
+                      fontSize: '0.78rem',
+                      fontWeight: selectedStatus === pill.id ? 700 : 500,
+                      backgroundColor: selectedStatus === pill.id ? 'var(--primary)' : 'var(--bg-main)',
+                      color: selectedStatus === pill.id ? '#FFFFFF' : 'var(--text-secondary)',
+                      border: '1px solid',
+                      borderColor: selectedStatus === pill.id ? 'var(--primary)' : 'var(--border-color)',
+                      transition: 'all 0.15s',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {pill.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Type Filter */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
                 Delivery:
               </span>
               <select
@@ -186,8 +193,8 @@ export const BrowseSessionsPage = () => {
                 style={{ padding: '0.35rem 0.75rem', fontSize: '0.825rem', width: 'auto' }}
               >
                 <option value="all">All Modes (Physical & Online)</option>
-                <option value="physical">Physical Classroom Only</option>
-                <option value="online">Online Virtual Only</option>
+                <option value="physical">Physical Classroom</option>
+                <option value="online">Virtual Classroom</option>
               </select>
             </div>
           </div>
@@ -246,8 +253,8 @@ export const BrowseSessionsPage = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.25rem',
             }}
           >
             {sessions.map((session) => (

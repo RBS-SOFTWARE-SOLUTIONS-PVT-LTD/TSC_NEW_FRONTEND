@@ -112,30 +112,23 @@ export const FeedbackModal = ({ session, isOpen, onClose, onSuccess }) => {
               </label>
 
               {/* Number Buttons Grid */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(10, 1fr)',
-                  gap: '4px',
-                  marginBottom: '0.75rem',
-                }}
-              >
+              <div className="rating-grid-responsive" style={{ marginBottom: '0.85rem' }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((score) => (
                   <button
                     key={score}
                     type="button"
                     onClick={() => setRating(score)}
                     style={{
-                      height: '42px',
+                      height: '44px',
                       borderRadius: 'var(--radius-sm)',
-                      fontWeight: 700,
+                      fontWeight: 800,
                       fontSize: '0.95rem',
                       border: '1.5px solid',
                       borderColor: rating === score ? 'var(--secondary)' : 'var(--border-color)',
                       backgroundColor: rating === score ? 'var(--primary)' : 'var(--bg-surface)',
                       color: rating === score ? '#FFFFFF' : 'var(--text-primary)',
                       boxShadow: rating === score ? 'var(--shadow-maroon)' : 'none',
-                      transform: rating === score ? 'scale(1.05)' : 'none',
+                      transform: rating === score ? 'scale(1.04)' : 'none',
                       transition: 'all var(--transition-fast)',
                     }}
                   >

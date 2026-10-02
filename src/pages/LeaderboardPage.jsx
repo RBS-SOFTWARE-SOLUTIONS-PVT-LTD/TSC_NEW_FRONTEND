@@ -413,15 +413,14 @@ export const LeaderboardPage = () => {
 
           {/* Interactive Navigation Tabs */}
           <div
+            className="horizontal-scroll-chips"
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.6rem',
               marginTop: '1.75rem',
               background: 'rgba(0, 0, 0, 0.25)',
               padding: '6px',
               borderRadius: 'var(--radius-lg)',
-              width: 'fit-content',
+              width: '100%',
+              maxWidth: 'fit-content',
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
             }}
@@ -440,6 +439,8 @@ export const LeaderboardPage = () => {
                 background: activeTab === 'live' ? 'linear-gradient(135deg, #FFD700 0%, #D4A72C 100%)' : 'transparent',
                 boxShadow: activeTab === 'live' ? 'var(--shadow-sm)' : 'none',
                 transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <Flame size={16} color={activeTab === 'live' ? '#3A2700' : '#FDE68A'} />
@@ -460,6 +461,8 @@ export const LeaderboardPage = () => {
                 background: activeTab === 'monthly' ? 'linear-gradient(135deg, #FFD700 0%, #D4A72C 100%)' : 'transparent',
                 boxShadow: activeTab === 'monthly' ? 'var(--shadow-sm)' : 'none',
                 transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <Calendar size={16} color={activeTab === 'monthly' ? '#3A2700' : '#FDE68A'} />
@@ -480,6 +483,8 @@ export const LeaderboardPage = () => {
                 background: activeTab === 'annual' ? 'linear-gradient(135deg, #FFD700 0%, #D4A72C 100%)' : 'transparent',
                 boxShadow: activeTab === 'annual' ? 'var(--shadow-sm)' : 'none',
                 transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <TrendingUp size={16} color={activeTab === 'annual' ? '#3A2700' : '#FDE68A'} />
@@ -500,6 +505,8 @@ export const LeaderboardPage = () => {
                 background: activeTab === 'awards' ? 'linear-gradient(135deg, #FFD700 0%, #D4A72C 100%)' : 'transparent',
                 boxShadow: activeTab === 'awards' ? 'var(--shadow-sm)' : 'none',
                 transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <Award size={16} color={activeTab === 'awards' ? '#3A2700' : '#FDE68A'} />
@@ -1243,10 +1250,10 @@ export const LeaderboardPage = () => {
           7. TUTOR ACHIEVEMENT DOSSIER MODAL (Rich UX Inspection Drawer)
           ========================================================================= */}
       {selectedTutorDossier && (
-        <div className="modal-overlay" onClick={() => setSelectedTutorDossier(null)}>
+        <div className="modal-backdrop" onClick={() => setSelectedTutorDossier(null)}>
           <div
             className="modal-content glass-panel"
-            style={{ maxWidth: '580px', width: '100%', padding: '2rem' }}
+            style={{ maxWidth: '580px', width: '100%', padding: '1.75rem' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header with Avatar & Rank */}

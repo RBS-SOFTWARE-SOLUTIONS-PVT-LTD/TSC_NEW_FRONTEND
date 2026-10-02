@@ -94,7 +94,7 @@ export const HomePage = () => {
         style={{
           background: 'linear-gradient(135deg, #5A1024 0%, #7A1631 55%, #3A0713 100%)',
           color: '#FAF9F6',
-          padding: '4.5rem 1.5rem 5rem',
+          padding: 'clamp(2.5rem, 6vw, 4.5rem) 1.25rem clamp(3rem, 7vw, 5rem)',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -117,8 +117,8 @@ export const HomePage = () => {
             position: 'relative',
             zIndex: 1,
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '3rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '2.5rem',
             alignItems: 'center',
           }}
         >
@@ -132,25 +132,25 @@ export const HomePage = () => {
                 backgroundColor: 'rgba(212, 167, 44, 0.18)',
                 border: '1px solid rgba(212, 167, 44, 0.45)',
                 color: 'var(--secondary-light)',
-                padding: '0.4rem 0.9rem',
+                padding: '0.35rem 0.85rem',
                 borderRadius: 'var(--radius-pill)',
-                fontSize: '0.825rem',
+                fontSize: '0.78rem',
                 fontWeight: 700,
                 letterSpacing: '0.04em',
-                marginBottom: '1.25rem',
+                marginBottom: '1rem',
                 textTransform: 'uppercase',
               }}
             >
-              <Sparkles size={15} />
+              <Sparkles size={14} />
               <span>Official Academic Peer Support</span>
             </div>
 
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.25rem, 4.5vw, 3.4rem)',
+                fontSize: 'clamp(2rem, 5vw, 3.3rem)',
                 fontWeight: 800,
-                lineHeight: 1.15,
+                lineHeight: 1.18,
                 color: '#FFFFFF',
                 marginBottom: '1.25rem',
                 letterSpacing: '-0.02em',
@@ -171,27 +171,27 @@ export const HomePage = () => {
 
             <p
               style={{
-                fontSize: '1.1rem',
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
                 color: '#E8E4DD',
-                lineHeight: 1.65,
-                marginBottom: '2.25rem',
+                lineHeight: 1.6,
+                marginBottom: '2rem',
                 maxWidth: '540px',
               }}
             >
               Empowering University of Kelaniya undergraduates through structured peer tutoring, verified attendance logging, real-time OTP check-ins, and performance feedback.
             </p>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
               {!isAuthenticated ? (
                 <>
-                  <Link to="/register" className="btn btn-secondary btn-lg">
+                  <Link to="/register" className="btn btn-secondary btn-lg" style={{ flex: '1 1 auto', minWidth: '200px' }}>
                     Join as Student / Tutor
                     <ArrowRight size={18} />
                   </Link>
                   <Link
                     to="/login"
                     className="btn btn-outline"
-                    style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.08)' }}
+                    style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.08)', flex: '1 1 auto', minWidth: '130px' }}
                   >
                     Portal Login
                   </Link>
@@ -200,6 +200,7 @@ export const HomePage = () => {
                 <Link
                   to={role === 'admin' ? '/admin/dashboard' : role === 'tutor' ? '/tutor/dashboard' : '/student/dashboard'}
                   className="btn btn-secondary btn-lg"
+                  style={{ flex: '1 1 auto', minWidth: '220px' }}
                 >
                   Go to {role === 'admin' ? 'Admin Portal' : role === 'tutor' ? 'Tutor Command Center' : 'Student Hub'}
                   <ArrowRight size={18} />
@@ -213,85 +214,86 @@ export const HomePage = () => {
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
               backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               borderRadius: 'var(--radius-xl)',
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3vw, 2rem)',
               boxShadow: 'var(--shadow-xl)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.12)', paddingBottom: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.12)', paddingBottom: '0.85rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <GraduationCap size={24} color="var(--secondary-light)" />
-                <span style={{ fontWeight: 700, fontSize: '1rem', color: '#FFFFFF' }}>
+                <GraduationCap size={22} color="var(--secondary-light)" />
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#FFFFFF' }}>
                   Center Metrics
                 </span>
               </div>
-              <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>
+              <span className="badge badge-gold" style={{ fontSize: '0.7rem' }}>
                 Semester 2026/27
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+            <div className="hero-metrics-grid">
               <div
                 style={{
-                  background: 'rgba(0, 0, 0, 0.2)',
-                  padding: '1.25rem',
+                  background: 'rgba(0, 0, 0, 0.22)',
+                  padding: '1rem',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                 }}
               >
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--secondary-light)', lineHeight: 1 }}>
+                <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: 'var(--secondary-light)', lineHeight: 1 }}>
                   100%
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#D5D0C6', marginTop: '0.4rem', fontWeight: 500 }}>
+                <div style={{ fontSize: '0.78rem', color: '#D5D0C6', marginTop: '0.35rem', fontWeight: 500 }}>
                   Verified Attendance
                 </div>
               </div>
 
               <div
                 style={{
-                  background: 'rgba(0, 0, 0, 0.2)',
-                  padding: '1.25rem',
+                  background: 'rgba(0, 0, 0, 0.22)',
+                  padding: '1rem',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                 }}
               >
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>
+                <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>
                   {sessions.length || '24+'}
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#D5D0C6', marginTop: '0.4rem', fontWeight: 500 }}>
+                <div style={{ fontSize: '0.78rem', color: '#D5D0C6', marginTop: '0.35rem', fontWeight: 500 }}>
                   Academic Sessions
                 </div>
               </div>
 
               <div
                 style={{
-                  background: 'rgba(0, 0, 0, 0.2)',
-                  padding: '1.25rem',
+                  background: 'rgba(0, 0, 0, 0.22)',
+                  padding: '1rem',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                 }}
               >
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>
+                <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>
                   6
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#D5D0C6', marginTop: '0.4rem', fontWeight: 500 }}>
+                <div style={{ fontSize: '0.78rem', color: '#D5D0C6', marginTop: '0.35rem', fontWeight: 500 }}>
                   Active Faculties
                 </div>
               </div>
 
               <div
                 style={{
-                  background: 'rgba(0, 0, 0, 0.2)',
-                  padding: '1.25rem',
+                  background: 'rgba(0, 0, 0, 0.22)',
+                  padding: '1rem',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid rgba(255, 255, 255, 0.06)',
                 }}
               >
-                <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--secondary-light)', lineHeight: 1 }}>
+                <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: 'var(--secondary-light)', lineHeight: 1 }}>
                   4.9★
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#D5D0C6', marginTop: '0.4rem', fontWeight: 500 }}>
+                <div style={{ fontSize: '0.78rem', color: '#D5D0C6', marginTop: '0.35rem', fontWeight: 500 }}>
                   Peer Quality Rating
                 </div>
               </div>
@@ -308,7 +310,7 @@ export const HomePage = () => {
           style={{
             backgroundColor: '#FFFBEB',
             borderBottom: '2px solid var(--secondary)',
-            padding: '1.25rem 1.5rem',
+            padding: '1rem 1.25rem',
           }}
         >
           <div
@@ -319,22 +321,22 @@ export const HomePage = () => {
               flexWrap: 'wrap',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '1rem',
+              gap: '0.85rem',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: '1 1 260px' }}>
               <span className="status-dot status-dot-active" />
               <div>
-                <strong style={{ color: '#92400E', fontSize: '0.95rem' }}>
+                <strong style={{ color: '#92400E', fontSize: '0.925rem' }}>
                   {activeSessions.length} Session{activeSessions.length === 1 ? ' is' : 's are'} Currently LIVE!
                 </strong>
-                <span style={{ color: '#78350F', fontSize: '0.85rem', marginLeft: '0.5rem' }}>
+                <span style={{ color: '#78350F', fontSize: '0.825rem', display: 'block' }}>
                   Students present in class can verify attendance using OTP or QR code.
                 </span>
               </div>
             </div>
 
-            <Link to="/browse?status=active" className="btn btn-primary btn-sm">
+            <Link to="/browse?status=active" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }}>
               <Radio size={15} />
               View Live Sessions
             </Link>
@@ -345,14 +347,14 @@ export const HomePage = () => {
       {/* =========================================================================
           3. FEATURED SESSIONS PREVIEW
           ========================================================================= */}
-      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-main)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 5vw, 4rem) 1.25rem', backgroundColor: 'var(--bg-main)' }}>
         <div style={{ maxWidth: 'var(--container-max-w)', margin: '0 auto' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', gap: '0.75rem' }}>
             <div>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Academic Schedule
               </span>
-              <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--text-primary)', marginTop: '0.2rem' }}>
                 Featured Tutoring Sessions
               </h2>
             </div>
@@ -371,13 +373,13 @@ export const HomePage = () => {
               className="card"
               style={{
                 textAlign: 'center',
-                padding: '3rem 2rem',
+                padding: '3rem 1.5rem',
                 backgroundColor: 'var(--bg-surface)',
               }}
             >
-              <Calendar size={40} color="var(--primary)" style={{ margin: '0 auto 1rem' }} />
+              <Calendar size={36} color="var(--primary)" style={{ margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>No Sessions Scheduled Yet</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '400px', margin: '0 auto 1.5rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', maxWidth: '400px', margin: '0 auto 1.5rem' }}>
                 Tutors will post upcoming peer tutoring sessions soon. Check back shortly.
               </p>
               {role === 'tutor' && (
@@ -390,8 +392,8 @@ export const HomePage = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
-                gap: '1.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.25rem',
               }}
             >
               {sessions.slice(0, 6).map((session) => (
@@ -417,7 +419,7 @@ export const HomePage = () => {
           ========================================================================= */}
       <section
         style={{
-          padding: '4rem 1.5rem',
+          padding: 'clamp(2.5rem, 5vw, 4rem) 1.25rem',
           backgroundColor: '#FFFFFF',
           borderTop: '1px solid var(--border-color)',
           borderBottom: '1px solid var(--border-color)',
@@ -427,13 +429,13 @@ export const HomePage = () => {
           <div
             className="card card-gold-accent"
             style={{
-              padding: '2.5rem',
+              padding: 'clamp(1.5rem, 4vw, 2.5rem)',
               background: 'linear-gradient(135deg, #FAF9F6 0%, #FFFDF8 100%)',
               borderColor: 'rgba(212, 167, 44, 0.4)',
               boxShadow: 'var(--shadow-md)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '2rem',
               alignItems: 'center',
             }}
           >
@@ -447,7 +449,7 @@ export const HomePage = () => {
                   color: 'var(--secondary-dark)',
                   padding: '0.35rem 0.8rem',
                   borderRadius: 'var(--radius-pill)',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: 800,
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
@@ -455,28 +457,28 @@ export const HomePage = () => {
                   border: '1px solid rgba(212,167,44,0.3)',
                 }}
               >
-                <Award size={16} />
+                <Award size={15} />
                 <span>Academic Distinction Award</span>
               </div>
 
-              <h3 style={{ fontSize: '1.8rem', color: 'var(--primary)', marginBottom: '0.75rem' }}>
+              <h3 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 1.8rem)', color: 'var(--primary)', marginBottom: '0.65rem' }}>
                 Tutor of the Month Spotlight
               </h3>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.55, marginBottom: '1.25rem' }}>
                 Recognizing outstanding peer tutors who exhibit exceptional dedication, high student rating satisfaction scores, and rigorous verified tutoring hours.
               </p>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Star size={20} fill="#D4A72C" color="#D4A72C" />
-                  <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Star size={18} fill="#D4A72C" color="#D4A72C" />
+                  <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>
                     {topTutor?.averageRating?.toFixed(1) || '5.0'} / 10 Rating
                   </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Clock size={20} color="var(--primary)" />
-                  <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-primary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Clock size={18} color="var(--primary)" />
+                  <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-primary)' }}>
                     {topTutor?.totalFeedbacks || 0} Student Reviews
                   </span>
                 </div>
@@ -493,7 +495,7 @@ export const HomePage = () => {
                 background: '#FFFFFF',
                 border: '1.5px solid rgba(212, 167, 44, 0.4)',
                 borderRadius: 'var(--radius-xl)',
-                padding: '1.75rem',
+                padding: '1.5rem',
                 textAlign: 'center',
                 boxShadow: 'var(--shadow-gold)',
                 position: 'relative',
@@ -501,30 +503,30 @@ export const HomePage = () => {
             >
               <div
                 style={{
-                  width: '72px',
-                  height: '72px',
+                  width: '64px',
+                  height: '64px',
                   borderRadius: '50%',
                   background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)',
                   color: '#FFFFFF',
-                  fontSize: '1.75rem',
+                  fontSize: '1.6rem',
                   fontWeight: 800,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  margin: '0 auto 1rem',
+                  margin: '0 auto 0.85rem',
                   border: '3px solid #D4A72C',
                 }}
               >
                 {topTutor?.tutorName ? topTutor.tutorName.charAt(0).toUpperCase() : 'UOK'}
               </div>
 
-              <h4 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
+              <h4 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>
                 {topTutor?.tutorName || 'Verified Faculty Peer Tutor'}
               </h4>
-              <p style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '0.75rem' }}>
+              <p style={{ fontSize: '0.825rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '0.65rem' }}>
                 Faculty of Computing & Technology
               </p>
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
                 "Tutoring allows us to reinforce foundational concepts while guiding fellow students to academic excellence."
               </p>
             </div>
@@ -535,20 +537,20 @@ export const HomePage = () => {
       {/* =========================================================================
           5. PARTICIPATING FACULTIES
           ========================================================================= */}
-      <section style={{ padding: '4rem 1.5rem', backgroundColor: 'var(--bg-main)' }}>
+      <section style={{ padding: 'clamp(2.5rem, 5vw, 4rem) 1.25rem', backgroundColor: 'var(--bg-main)' }}>
         <div style={{ maxWidth: 'var(--container-max-w)', margin: '0 auto', textAlign: 'center' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Campus Wide Reach
           </span>
-          <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginTop: '0.25rem', marginBottom: '2.5rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--text-primary)', marginTop: '0.2rem', marginBottom: '2rem' }}>
             Supported University Faculties
           </h2>
 
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '1.25rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '1rem',
             }}
           >
             {[
@@ -563,7 +565,7 @@ export const HomePage = () => {
                 key={idx}
                 className="card card-interactive"
                 style={{
-                  padding: '1.5rem 1.25rem',
+                  padding: '1.25rem 1rem',
                   textAlign: 'left',
                   display: 'flex',
                   flexDirection: 'column',
@@ -571,15 +573,15 @@ export const HomePage = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{fac.icon}</div>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.04em' }}>
+                  <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>{fac.icon}</div>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.04em' }}>
                     {fac.code}
                   </div>
-                  <h4 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', margin: '0.25rem 0 0.5rem' }}>
+                  <h4 style={{ fontSize: '0.98rem', color: 'var(--text-primary)', margin: '0.2rem 0 0.4rem' }}>
                     {fac.name}
                   </h4>
                 </div>
-                <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: 1.35 }}>
                   {fac.desc}
                 </p>
               </div>
@@ -594,7 +596,7 @@ export const HomePage = () => {
         isOpen={isAttendModalOpen}
         onClose={() => setIsAttendModalOpen(false)}
         onSuccess={() => {
-          fetchSessions();
+          fetchHomeData();
         }}
       />
 
@@ -603,7 +605,7 @@ export const HomePage = () => {
         isOpen={isFeedbackModalOpen}
         onClose={() => setIsFeedbackModalOpen(false)}
         onSuccess={() => {
-          fetchSessions();
+          fetchHomeData();
         }}
       />
 
@@ -612,7 +614,7 @@ export const HomePage = () => {
         isOpen={isControlModalOpen}
         onClose={() => setIsControlModalOpen(false)}
         onSessionEnded={() => {
-          fetchSessions();
+          fetchHomeData();
         }}
       />
     </div>
