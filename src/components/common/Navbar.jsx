@@ -232,7 +232,7 @@ export const Navbar = () => {
           {/* Right CTA / User Profile Menu */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             {!isAuthenticated ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <div className="desktop-auth-btns" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Link to="/login" className="btn btn-outline btn-sm">
                   Sign In
                 </Link>
@@ -241,6 +241,7 @@ export const Navbar = () => {
                 </Link>
               </div>
             ) : (
+
               <div style={{ position: 'relative' }}>
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
@@ -565,7 +566,7 @@ export const Navbar = () => {
         {/* CSS Display rules */}
         <style>{`
           @media (max-width: 868px) {
-            .desktop-nav { display: none !important; }
+            .desktop-nav, .desktop-auth-btns { display: none !important; }
             .mobile-menu-btn { display: flex !important; }
           }
           @media (min-width: 869px) {
@@ -573,6 +574,7 @@ export const Navbar = () => {
           }
         `}</style>
       </header>
+
     </>
   );
 };
