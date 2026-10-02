@@ -2,7 +2,7 @@
 
 Official Academic Tutoring Support Center Portal for the University of Kelaniya.
 
-## 🚀 Key Features
+## ❤️ Key Features
 - **Student Dashboard**: Live class radar, verified attendance feed, 1-tap OTP check-in, academic standing metrics.
 - **Tutor Command Center**: Live session controls, real-time OTP/QR code broadcasting, dynamic rating scores.
 - **Admin Audit & Command**: User management, session audit trails, system performance metrics.
