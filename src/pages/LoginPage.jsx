@@ -64,23 +64,6 @@ export const LoginPage = () => {
     }
   };
 
-  // Demo autofill helper for rapid evaluation
-  const setDemoCredentials = (type) => {
-    if (type === 'student') {
-      setPortalType('user');
-      setEmail('student@kln.ac.lk');
-      setPassword('password123');
-    } else if (type === 'tutor') {
-      setPortalType('user');
-      setEmail('tutor@kln.ac.lk');
-      setPassword('password123');
-    } else if (type === 'admin') {
-      setPortalType('admin');
-      setEmail('admin@kln.ac.lk');
-      setPassword('admin123');
-    }
-  };
-
   return (
     <div
       style={{
@@ -144,7 +127,7 @@ export const LoginPage = () => {
               </h2>
 
               <p style={{ color: '#D5D0C6', fontSize: '0.925rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-                Sign in to access your customized academic hub. Track verified hours, participate in peer tutoring sessions, and provide performance reviews.
+                Sign in with your university credentials to access your customized academic hub. Track verified hours, participate in peer tutoring sessions, and provide performance reviews.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
@@ -164,45 +147,15 @@ export const LoginPage = () => {
             </div>
           </div>
 
-          {/* Bottom Fast Testing Switcher */}
           <div
             style={{
-              marginTop: '2.5rem',
-              padding: '1rem',
-              background: 'rgba(0, 0, 0, 0.25)',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              paddingTop: '2rem',
+              borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+              fontSize: '0.825rem',
+              color: 'rgba(250, 249, 246, 0.75)',
             }}
           >
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--secondary-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-              ⚡ Fast Demo Credentials Autofill:
-            </div>
-            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => setDemoCredentials('student')}
-                className="btn btn-sm"
-                style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
-              >
-                Student Demo
-              </button>
-              <button
-                type="button"
-                onClick={() => setDemoCredentials('tutor')}
-                className="btn btn-sm"
-                style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
-              >
-                Tutor Demo
-              </button>
-              <button
-                type="button"
-                onClick={() => setDemoCredentials('admin')}
-                className="btn btn-sm"
-                style={{ background: 'rgba(212,167,44,0.3)', color: 'var(--secondary-light)', fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
-              >
-                Admin Demo
-              </button>
-            </div>
+            Need assistance or new account registration? Contact your department coordinator or the Faculty of Computing & Technology Helpdesk.
           </div>
         </div>
 
