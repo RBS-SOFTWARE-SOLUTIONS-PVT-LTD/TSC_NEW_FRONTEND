@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import KelaniyaLogo from '../components/common/KelaniyaLogo';
@@ -16,12 +16,10 @@ import {
 } from 'lucide-react';
 
 export const LoginPage = () => {
-  const { login, loginAdmin, isAuthenticated, role } = useAuth();
+  const { login, isAuthenticated, role } = useAuth();
   const { showSuccess, showError } = useToast();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const [portalType, setPortalType] = useState('user'); // 'user' (student/tutor) or 'admin'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -44,18 +42,12 @@ export const LoginPage = () => {
 
     setLoading(true);
     try {
-      if (portalType === 'admin') {
-        const adminUser = await loginAdmin(email, password);
-        showSuccess(`Welcome back, ${adminUser.name || 'Administrator'}!`);
-        navigate('/admin/dashboard');
+      const loggedUser = await login(email, password);
+      showSuccess(`Welcome, ${loggedUser.name}!`);
+      if (loggedUser.role === 'tutor') {
+        navigate('/tutor/dashboard');
       } else {
-        const loggedUser = await login(email, password);
-        showSuccess(`Welcome, ${loggedUser.name}!`);
-        if (loggedUser.role === 'tutor') {
-          navigate('/tutor/dashboard');
-        } else {
-          navigate('/student/dashboard');
-        }
+        navigate('/student/dashboard');
       }
     } catch (err) {
       showError(err.message || 'Login failed. Please check your credentials.');
@@ -127,7 +119,7 @@ export const LoginPage = () => {
               </h2>
 
               <p style={{ color: '#D5D0C6', fontSize: '0.925rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-                Sign in with your university credentials to access your customized academic hub. Track verified hours, participate in peer tutoring sessions, and provide performance reviews.
+                Sign in with your university student or peer tutor credentials to join live classes, track attendance, and submit session reviews.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
@@ -160,61 +152,16 @@ export const LoginPage = () => {
         </div>
 
         {/* Right Side: Login Form */}
-        <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          {/* Portal Switcher Tabs */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              background: 'var(--bg-main)',
-              padding: '4px',
-              borderRadius: 'var(--radius-md)',
-              marginBottom: '1.75rem',
-              border: '1px solid var(--border-color)',
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setPortalType('user')}
-              style={{
-                padding: '0.65rem',
-                borderRadius: 'var(--radius-sm)',
-                fontWeight: portalType === 'user' ? 700 : 500,
-                fontSize: '0.875rem',
-                backgroundColor: portalType === 'user' ? 'var(--bg-surface)' : 'transparent',
-                color: portalType === 'user' ? 'var(--primary)' : 'var(--text-secondary)',
-                boxShadow: portalType === 'user' ? 'var(--shadow-xs)' : 'none',
-                transition: 'all 0.2s',
-              }}
-            >
-              Student / Tutor Portal
-            </button>
-            <button
-              type="button"
-              onClick={() => setPortalType('admin')}
-              style={{
-                padding: '0.65rem',
-                borderRadius: 'var(--radius-sm)',
-                fontWeight: portalType === 'admin' ? 700 : 500,
-                fontSize: '0.875rem',
-                backgroundColor: portalType === 'admin' ? 'var(--bg-surface)' : 'transparent',
-                color: portalType === 'admin' ? 'var(--primary)' : 'var(--text-secondary)',
-                boxShadow: portalType === 'admin' ? 'var(--shadow-xs)' : 'none',
-                transition: 'all 0.2s',
-              }}
-            >
-              Faculty Administration
-            </button>
-          </div>
-
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.45rem', color: 'var(--text-primary)' }}>
-              {portalType === 'admin' ? 'Admin Portal Sign In' : 'Sign In to Your Account'}
+        <div style={{ padding: '3.5rem 2.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ marginBottom: '1.75rem' }}>
+            <span className="badge badge-primary" style={{ marginBottom: '0.5rem' }}>
+              Student & Peer Tutor Sign In
+            </span>
+            <h3 style={{ fontSize: '1.65rem', color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+              Sign In to Your Account
             </h3>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-              {portalType === 'admin'
-                ? 'Enter administrative credentials for system supervision and audits.'
-                : 'Enter your university email address and secure password.'}
+              Enter your university email address and secure password.
             </p>
           </div>
 
@@ -290,20 +237,35 @@ export const LoginPage = () => {
               className="btn btn-primary"
               style={{ width: '100%', padding: '0.8rem', marginTop: '0.75rem' }}
             >
-              {loading ? 'Authenticating...' : portalType === 'admin' ? 'Sign In as Administrator' : 'Sign In'}
+              {loading ? 'Authenticating...' : 'Sign In'}
               <ArrowRight size={18} />
             </button>
           </form>
 
           {/* Switch to Register */}
-          {portalType === 'user' && (
-            <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-              Don't have an academic account yet?{' '}
-              <Link to="/register" style={{ fontWeight: 700, color: 'var(--primary)' }}>
-                Register Here
-              </Link>
-            </div>
-          )}
+          <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+            Don't have an academic account yet?{' '}
+            <Link to="/register" style={{ fontWeight: 700, color: 'var(--primary)' }}>
+              Register Here
+            </Link>
+          </div>
+
+          {/* Discreet Faculty Staff Link */}
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: '2rem',
+              paddingTop: '1.25rem',
+              borderTop: '1px solid var(--border-light)',
+              fontSize: '0.8rem',
+              color: 'var(--text-muted)',
+            }}
+          >
+            Faculty Staff or Administrator?{' '}
+            <Link to="/admin/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>
+              Access Faculty Admin Console &rarr;
+            </Link>
+          </div>
         </div>
       </div>
     </div>

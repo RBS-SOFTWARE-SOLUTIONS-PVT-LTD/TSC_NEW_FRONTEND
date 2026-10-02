@@ -56,23 +56,23 @@ export const Footer = () => {
             </h4>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.875rem' }}>
               <li>
-                <Link to="/student/dashboard" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
-                  Student Learning Hub
-                </Link>
-              </li>
-              <li>
-                <Link to="/tutor/dashboard" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
-                  Tutor Management Room
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/dashboard" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
-                  Faculty Administration
-                </Link>
-              </li>
-              <li>
                 <Link to="/browse" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
-                  Public Session Calendar
+                  Explore Sessions
+                </Link>
+              </li>
+              <li>
+                <Link to="/leaderboard" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
+                  Tutor Leaderboard & Awards
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" style={{ color: '#C5C1BA', transition: 'color 0.2s' }}>
+                  Student & Tutor Portal
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin/login" style={{ color: 'var(--secondary-light)', transition: 'color 0.2s', fontWeight: 600 }}>
+                  Faculty Staff & Admin Access &rarr;
                 </Link>
               </li>
             </ul>

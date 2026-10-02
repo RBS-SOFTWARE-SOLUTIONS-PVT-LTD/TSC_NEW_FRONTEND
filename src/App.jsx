@@ -24,6 +24,7 @@ import TutorCreateSession from './pages/tutor/TutorCreateSession';
 import TutorMySessions from './pages/tutor/TutorMySessions';
 
 // Admin Pages
+import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUserDirectory from './pages/admin/AdminUserDirectory';
 import AdminSessionAudit from './pages/admin/AdminSessionAudit';
@@ -42,6 +43,7 @@ export const App = () => {
                 <Route path="/browse" element={<BrowseSessionsPage />} />
                 <Route path="/leaderboard" element={<LeaderboardPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/admin/login" element={<AdminLoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
                 {/* Student Workspace */}
