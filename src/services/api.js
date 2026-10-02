@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 // Base API URL configuration
-const rawApiUrl = import.meta.env.VITE_API_BASE_URL || '';
+let rawApiUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+if (rawApiUrl && !rawApiUrl.startsWith('http://') && !rawApiUrl.startsWith('https://') && !rawApiUrl.startsWith('/')) {
+  rawApiUrl = `https://${rawApiUrl}`;
+}
 const API_BASE_URL = rawApiUrl ? rawApiUrl.replace(/\/+$/, '') : 'http://localhost:3000';
+
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
