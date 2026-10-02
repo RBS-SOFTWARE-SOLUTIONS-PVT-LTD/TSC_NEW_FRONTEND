@@ -2165,10 +2165,7 @@ img, svg {
 
 .footer-industry-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  padding-top: 1.5rem;
 }
 
 .footer-bottom-main-row {
@@ -2176,18 +2173,54 @@ img, svg {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.82rem;
-  color: #71717A;
+  gap: 1.25rem;
+}
+
+.footer-left-branding {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
 }
 
 .footer-copyright-text {
+  font-size: 0.82rem;
   color: #A1A1AA;
 }
 
 .footer-copyright-text strong {
   color: #E4E4E7;
   font-weight: 600;
+}
+
+.footer-creator-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #71717A;
+}
+
+.creator-bullet {
+  color: #E8C866;
+  font-size: 0.75rem;
+}
+
+.creator-label {
+  color: #8E8E93;
+}
+
+.creator-company {
+  color: #E8C866;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.creator-team {
+  color: #D4D4D8;
+  font-weight: 500;
+  font-size: 0.78rem;
 }
 
 .footer-meta-badges {
@@ -2219,65 +2252,22 @@ img, svg {
   color: #3F3F46;
 }
 
-.footer-creator-signature-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 0.25rem;
-}
-
-.footer-signature-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: 0.78rem;
-  color: #71717A;
-  transition: all var(--transition-normal);
-}
-
-.footer-signature-pill:hover {
-  background: rgba(212, 167, 44, 0.05);
-  border-color: rgba(212, 167, 44, 0.2);
-}
-
-.signature-prefix {
-  color: #71717A;
-}
-
-.signature-company {
-  color: #E8C866;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.signature-team {
-  color: #A1A1AA;
-  font-weight: 500;
-}
-
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .footer-bottom-main-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
-  .footer-creator-signature-row {
-    justify-content: flex-start;
+  .footer-left-branding {
+    align-items: flex-start;
   }
 
-  .footer-signature-pill {
-    text-align: left;
-    justify-content: flex-start;
-    padding: 6px 12px;
+  .footer-creator-line {
+    font-size: 0.76rem;
   }
 }
+
 
 
 

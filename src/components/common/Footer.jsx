@@ -115,14 +115,24 @@ export const Footer = () => {
         </div>
 
         {/* =========================================================================
-            INDUSTRY-LEVEL BOTTOM BAR: COPYRIGHT & CREATOR SIGNATURE
+            INDUSTRY-LEVEL BOTTOM BAR: LEFT-ALIGNED BRANDING & LEGAL METAS
             ========================================================================= */}
         <div className="footer-industry-bottom">
           <div className="footer-bottom-main-row">
-            <div className="footer-copyright-text">
-              © {new Date().getFullYear()} <strong>University of Kelaniya</strong>. Tutoring Support Center System.
+            {/* Left Block: University Copyright & RBS Software Solutions Creator Signature */}
+            <div className="footer-left-branding">
+              <div className="footer-copyright-text">
+                © {new Date().getFullYear()} <strong>University of Kelaniya</strong>. Tutoring Support Center System.
+              </div>
+              <div className="footer-creator-line">
+                <span className="creator-bullet">⚡</span>
+                <span className="creator-label">Engineered & Developed by</span>
+                <strong className="creator-company">RBS Software Solutions</strong>
+                <span className="creator-team">(Sithija Himantha • Vishan Randima)</span>
+              </div>
             </div>
             
+            {/* Right Block: System Status & Policies */}
             <div className="footer-meta-badges">
               <span className="footer-status-pill">
                 <span className="footer-status-dot" /> System Operational
@@ -133,19 +143,11 @@ export const Footer = () => {
               <span>Privacy</span>
             </div>
           </div>
-
-          {/* Refined Creator Attribution Signature */}
-          <div className="footer-creator-signature-row">
-            <div className="footer-signature-pill">
-              <span className="signature-prefix">Engineered & Developed by</span>
-              <strong className="signature-company">RBS Software Solutions</strong>
-              <span className="signature-team">(Sithija Himantha • Vishan Randima)</span>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
   );
 };
+
 
 export default Footer;
