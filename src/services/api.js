@@ -1,14 +1,15 @@
 import axios from 'axios';
 
 // Base API URL configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const rawApiUrl = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE_URL = rawApiUrl ? rawApiUrl.replace(/\/+$/, '') : 'http://localhost:3000';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 20000,
 });
 
 // Request Interceptor: Attach JWT token automatically
