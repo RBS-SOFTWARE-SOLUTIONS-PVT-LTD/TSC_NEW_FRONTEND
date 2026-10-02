@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from './Sidebar';
+import MobileBottomNav from './MobileBottomNav';
 
 export const ProtectedRoute = ({ allowedRoles = [] }) => {
   const { isAuthenticated, role, loading } = useAuth();
@@ -45,8 +46,10 @@ export const ProtectedRoute = ({ allowedRoles = [] }) => {
       <main className="dashboard-body">
         <Outlet />
       </main>
+      <MobileBottomNav />
     </div>
   );
 };
 
 export default ProtectedRoute;
+

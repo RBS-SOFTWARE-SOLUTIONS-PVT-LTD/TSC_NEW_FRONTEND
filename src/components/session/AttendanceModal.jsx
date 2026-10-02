@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useToast } from '../../context/ToastContext';
 import { sessionApi } from '../../services/api';
 import confetti from 'canvas-confetti';
@@ -9,21 +9,52 @@ import {
   CheckCircle2, 
   Sparkles, 
   Clock, 
-  AlertCircle 
+  AlertCircle,
+  Video,
+  MapPin,
+  ChevronDown
 } from 'lucide-react';
 
-export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
+export const AttendanceModal = ({ session: initialSession, isOpen, onClose, onSuccess }) => {
   const { showSuccess, showError } = useToast();
+  const [session, setSession] = useState(initialSession);
+  const [activeSessions, setActiveSessions] = useState([]);
   const [activeTab, setActiveTab] = useState('otp'); // 'otp' or 'qr'
   const [otp, setOtp] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fetchingSessions, setFetchingSessions] = useState(false);
   const [verifiedData, setVerifiedData] = useState(null);
 
-  if (!isOpen || !session) return null;
+  useEffect(() => {
+    setSession(initialSession);
+  }, [initialSession]);
+
+  useEffect(() => {
+    if (isOpen && !initialSession) {
+      setFetchingSessions(true);
+      sessionApi.getAllSessions({ status: 'active' })
+        .then((res) => {
+          const list = res.data || [];
+          setActiveSessions(list);
+          if (list.length > 0) {
+            setSession(list[0]);
+          }
+        })
+        .catch((err) => console.error('Failed to load active sessions:', err))
+        .finally(() => setFetchingSessions(false));
+    }
+  }, [isOpen, initialSession]);
+
+  if (!isOpen) return null;
 
   const handleVerify = async (e) => {
     e.preventDefault();
+    if (!session || !session._id) {
+      showError('Please select an active tutoring session first.');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -41,19 +72,23 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
       setVerifiedData(res.data);
       showSuccess(res.message || 'Attendance verified successfully!');
 
-      // Trigger celebration confetti
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#7A1631', '#D4A72C', '#16A34A', '#FAF9F6'],
-      });
+      // Celebration confetti
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#7A1631', '#D4A72C', '#16A34A', '#FAF9F6'],
+        });
+      } catch (e) {
+        // Fallback if confetti blocked
+      }
 
       if (onSuccess) {
         onSuccess(session._id);
       }
     } catch (err) {
-      showError(err.message || 'Verification failed. Please check your code.');
+      showError(err.message || 'Verification failed. Please check your OTP code.');
     } finally {
       setLoading(false);
     }
@@ -69,7 +104,7 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
   return (
     <div className="modal-backdrop" onClick={handleClose}>
       <div
-        className="modal-content"
+        className="modal-content modal-responsive"
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: '480px' }}
       >
@@ -120,7 +155,7 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
                 Attendance Recorded!
               </h4>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.25rem' }}>
-                You have been officially checked into <strong>{session.subject}</strong> ({session.topic}).
+                You have been officially checked into <strong>{session?.subject}</strong> ({session?.topic}).
               </p>
 
               <div
@@ -151,26 +186,65 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
           ) : (
             /* Verification Form */
             <form onSubmit={handleVerify}>
-              {/* Session Meta Preview */}
-              <div
-                style={{
-                  background: 'var(--bg-main)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '0.875rem 1rem',
-                  marginBottom: '1.25rem',
-                }}
-              >
-                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase' }}>
-                  {session.subject}
+              {/* Session Selector or Meta Preview */}
+              {!initialSession && activeSessions.length > 1 ? (
+                <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+                  <label className="form-label">Select Active Session:</label>
+                  <select
+                    className="form-input"
+                    value={session?._id || ''}
+                    onChange={(e) => {
+                      const found = activeSessions.find(s => s._id === e.target.value);
+                      if (found) setSession(found);
+                    }}
+                  >
+                    {activeSessions.map((s) => (
+                      <option key={s._id} value={s._id}>
+                        {s.subject}: {s.topic} ({s.tutorId?.name || s.tutor || 'Tutor'})
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)', marginTop: '2px' }}>
-                  {session.topic}
+              ) : session ? (
+                <div
+                  style={{
+                    background: 'var(--bg-main)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '0.875rem 1rem',
+                    marginBottom: '1.25rem',
+                  }}
+                >
+                  <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase' }}>
+                    {session.subject}
+                  </div>
+                  <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)', marginTop: '2px' }}>
+                    {session.topic}
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                    Tutor: {session.tutorId?.name || session.tutor || 'Faculty Tutor'}
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                  Tutor: {session.tutorId?.name || session.tutor || 'Faculty Tutor'}
+              ) : (
+                <div
+                  style={{
+                    background: 'var(--warning-light)',
+                    border: '1px solid var(--secondary)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '1rem',
+                    marginBottom: '1.25rem',
+                    textAlign: 'center',
+                    fontSize: '0.85rem',
+                    color: 'var(--warning-text)',
+                  }}
+                >
+                  <AlertCircle size={20} style={{ margin: '0 auto 0.4rem' }} />
+                  <strong>No Active Session Found</strong>
+                  <p style={{ marginTop: '2px', fontSize: '0.8rem' }}>
+                    Please wait until your tutor starts the session before checking in.
+                  </p>
                 </div>
-              </div>
+              )}
 
               {/* Tab Selector: OTP vs QR */}
               <div
@@ -201,7 +275,7 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
                     gap: '0.4rem',
                   }}
                 >
-                  <KeyRound size={15} /> 6-Digit OTP Code
+                  <KeyRound size={15} /> 6-Digit OTP
                 </button>
                 <button
                   type="button"
@@ -232,22 +306,25 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
                   </label>
                   <input
                     id="otp-input"
-                    type="text"
+                    type="tel"
+                    pattern="[0-9]*"
+                    inputMode="numeric"
                     maxLength={6}
-                    placeholder="e.g. 849201"
+                    placeholder="• • • • • •"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
                     className="form-input"
                     autoFocus
                     style={{
-                      letterSpacing: '0.25em',
+                      letterSpacing: '0.3em',
                       textAlign: 'center',
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
+                      fontSize: '1.75rem',
+                      fontWeight: 800,
                       color: 'var(--primary)',
+                      padding: '0.75rem',
                     }}
                   />
-                  <span className="form-helper" style={{ textAlign: 'center', marginTop: '4px' }}>
+                  <span className="form-helper" style={{ textAlign: 'center', marginTop: '6px' }}>
                     Ask your tutor for the live verification OTP broadcasted on screen.
                   </span>
                 </div>
@@ -284,7 +361,7 @@ export const AttendanceModal = ({ session, isOpen, onClose, onSuccess }) => {
                 </button>
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !session}
                   className="btn btn-primary"
                   style={{ flex: 2 }}
                 >
