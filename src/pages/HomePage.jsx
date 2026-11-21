@@ -275,10 +275,10 @@ export const HomePage = () => {
                 }}
               >
                 <div style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>
-                  6
+                  1
                 </div>
                 <div style={{ fontSize: '0.78rem', color: '#D5D0C6', marginTop: '0.35rem', fontWeight: 500 }}>
-                  Active Faculties
+                  Active Faculty (FCT)
                 </div>
               </div>
 
@@ -540,48 +540,44 @@ export const HomePage = () => {
       <section style={{ padding: 'clamp(2.5rem, 5vw, 4rem) 1.25rem', backgroundColor: 'var(--bg-main)' }}>
         <div style={{ maxWidth: 'var(--container-max-w)', margin: '0 auto', textAlign: 'center' }}>
           <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-            Campus Wide Reach
+            Faculty Focus
           </span>
           <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--text-primary)', marginTop: '0.2rem', marginBottom: '2rem' }}>
-            Supported University Faculties
+            Supported University Faculty
           </h2>
 
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-              gap: '1rem',
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             {[
-              { name: 'Faculty of Science', code: 'FOS', icon: '🔬', desc: 'Mathematics, Physics, Chemistry, Zoology' },
               { name: 'Computing & Tech', code: 'FCT', icon: '💻', desc: 'Software Eng, Data Science, Networks' },
-              { name: 'Commerce & Mgmt', code: 'FCMS', icon: '📈', desc: 'Accountancy, Finance, Marketing, HR' },
-              { name: 'Humanities', code: 'FOH', icon: '📚', desc: 'Languages, Linguistics, Philosophy' },
-              { name: 'Social Sciences', code: 'FSS', icon: '🏛️', desc: 'Economics, Geography, Sociology' },
-              { name: 'Faculty of Medicine', code: 'FOM', icon: '🩺', desc: 'Anatomy, Physiology, Biochemistry' },
             ].map((fac, idx) => (
               <div
                 key={idx}
                 className="card card-interactive"
                 style={{
-                  padding: '1.25rem 1rem',
+                  padding: '1.75rem 1.5rem',
                   textAlign: 'left',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
+                  maxWidth: '340px',
+                  width: '100%',
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>{fac.icon}</div>
-                  <div style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.04em' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.65rem' }}>{fac.icon}</div>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--primary)', letterSpacing: '0.04em' }}>
                     {fac.code}
                   </div>
-                  <h4 style={{ fontSize: '0.98rem', color: 'var(--text-primary)', margin: '0.2rem 0 0.4rem' }}>
+                  <h4 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', margin: '0.25rem 0 0.5rem' }}>
                     {fac.name}
                   </h4>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', lineHeight: 1.35 }}>
+                <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                   {fac.desc}
                 </p>
               </div>
